@@ -12,7 +12,7 @@ namespace Bank_Simulator.UI_design
         {
             Console.Clear();
             Console.WriteLine("=========================================");
-            Console.WriteLine("             Bank Simulator              ");
+            Console.WriteLine("             BANK SIMULATOR              ");
             Console.WriteLine("=========================================\n");
             Choice();
         }

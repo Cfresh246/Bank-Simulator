@@ -18,7 +18,6 @@ namespace Bank_Simulator
             {
                 MainMenuDesign.HeaderMenu();
                 
-
                 // User input handling
                 Console.Write("\nChoose an option: ");
                 string? option = Console.ReadLine();  // ? Accepts nullable object
@@ -117,12 +116,9 @@ namespace Bank_Simulator
         {
             while (true)
             {
-                Console.Clear();
-                Line();
-                Console.WriteLine("{0,30}", "CREATE NEW ACCOUNT");
-                Line();
+                CreatingAccountDesign.Header();
 
-                Console.Write("\nEnter your full name: ");
+                Console.Write("Enter your full name: ");
                 string? name = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(name))  // FullName handling

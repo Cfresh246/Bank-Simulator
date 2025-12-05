@@ -144,27 +144,25 @@ namespace Bank_Simulator
                         continue;
                     }
 
-
-                    else  // Username cannot be duplicate. Has to be different.
-                    {
-                        bool usernameTaken = false;
-                        foreach (BankAccount account in accounts)
+                     // Username cannot be duplicate. Has to be different.
+                    
+                     bool usernameTaken = false;
+                     foreach (BankAccount account in accounts)
+                     {
+                        if (account.Username == username)
                         {
-                            if (account.Username == username)
-                            {
-                                ColorError();
-                                Console.WriteLine("Username already exists. Try another one.");
-                                KeyContinue(); Console.ReadKey();
-                                usernameTaken = true;
-                                break;
-                            }
+                            ColorError();
+                            Console.WriteLine("Username already exists. Try another one.");
+                            KeyContinue(); Console.ReadKey();
+                            usernameTaken = true;
+                            break;
                         }
-                        if (usernameTaken)
-                        {
-                            continue;
-                        }
-                    }
-                    // Pin Handling
+                     }
+                     if (usernameTaken)
+                     {
+                        continue;
+                     }
+                    
 
                     string pinInput;
 

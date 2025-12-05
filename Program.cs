@@ -16,29 +16,23 @@
             {
                 // The Main menu interface 1-To create the account, 2- login to existing account, 3- Exit the program.
                 Console.Clear();
-                bankaccountmanagement.Line();
-                Console.WriteLine("{0,27}", "BANK SIMULATOR TEST");
-                bankaccountmanagement.Line();
+                BankAccountManagement.Line();
+                Console.WriteLine("{0,27}", "BANK SIMULATOR ");
+                BankAccountManagement.Line();
                 Console.WriteLine();
 
                 string[] options = ["Create an account", "Log in", "Exit"];  // My way of looping and writing the choices possible for the user.
 
                 for (int i = 0; i < options.Length; i++)
                 {
-                    bankaccountmanagement.ColorNumber(i + 1);
+                    BankAccountManagement.ColorNumber(i + 1);
                     Console.WriteLine($") {options[i]}");
                 }
 
                 // User input handling
-                Console.Write("\nChoose an option: ");
-                string? option = Console.ReadLine();  // ? Accepts nullable object
+                int choice = BankAccountManagement.GetInt("\nChoose an option: ", 1, 3);
 
-                if (!int.TryParse(option, out int choice) || (choice < 1 || choice > 3))  // Handling of number that are not integer. Also handles numbers out of range
-                {
-                    Console.Write("Error: Please enter a valid input.");
-                    Console.ReadKey();
-                }
-                else if (choice == 3)
+                if (choice == 3)
                 {
                     Console.WriteLine("\nGoodBye!");
                     break;
@@ -488,42 +482,60 @@
                 }
             }
         }
-        public void Line()
+        public static void Line()
         {
             Console.WriteLine("=========================================");
         }
-        public void line2()
+        public static void line2()
         {
             Console.WriteLine("-----------------------------------------");
         }
-        public void ColorNumber(int num)
+        public static void ColorNumber(int num)
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write($"{num}");
             Console.ResetColor();
         }
-        public void ColorError()
+        public static void ColorError()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("\nError: ");
             Console.ResetColor();
         }
-        public void KeyContinue()
+        public static void KeyContinue()
         {
-            Console.Write("Press any key to continue...");
+            Console.Write("\nPress any key to continue...");
         }
-        public void ColorNew()
+        public static void ColorNew()
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Write("New ");
             Console.ResetColor();
         }
-        public void LoginInterface()
+        public static void LoginInterface()
         {
             Console.Clear();
             Line();
             Console.WriteLine("{0, 23}", "LOGIN");
             Line();
+        }
+        public static int GetInt(string message, int min, int max)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string? input = Console.ReadLine();
+
+                if (!int.TryParse(input, out int value) || (value < min || value > max))
+                {
+                    ColorError();
+                    Console.WriteLine($"Please enter a number between {min} and {max}.");
+                }
+                else
+                {
+                    return value;
+                }
+            }
         }
     }
 }

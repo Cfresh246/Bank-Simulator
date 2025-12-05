@@ -1,4 +1,6 @@
-﻿namespace Bank_Simulator
+﻿using Bank_Simulator.Input;
+
+namespace Bank_Simulator
 {
     internal class Program
     {
@@ -28,9 +30,10 @@
                     BankAccountManagement.ColorNumber(i + 1);
                     Console.WriteLine($") {options[i]}");
                 }
+                InputHelper.GetInt("\nChoose an option: ", 1, 3);
 
                 // User input handling
-                int choice = BankAccountManagement.GetInt("\nChoose an option: ", 1, 3);
+                int choice = Input.InputHelper.GetInt("\nChoose an option: ", 1, 3);
 
                 if (choice == 3)
                 {
@@ -519,23 +522,6 @@
             Console.WriteLine("{0, 23}", "LOGIN");
             Line();
         }
-        public static int GetInt(string message, int min, int max)
-        {
-            while (true)
-            {
-                Console.Write(message);
-                string? input = Console.ReadLine();
-
-                if (!int.TryParse(input, out int value) || (value < min || value > max))
-                {
-                    ColorError();
-                    Console.WriteLine($"Please enter a number between {min} and {max}.");
-                }
-                else
-                {
-                    return value;
-                }
-            }
-        }
+        
     }
 }

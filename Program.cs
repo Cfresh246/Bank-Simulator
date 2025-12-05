@@ -1,4 +1,4 @@
-﻿namespace Bank_Account_Simulator
+﻿namespace Bank_Simulator
 {
     internal class Program
     {
@@ -17,7 +17,7 @@
                 // The Main menu interface 1-To create the account, 2- login to existing account, 3- Exit the program.
                 Console.Clear();
                 bankaccountmanagement.Line();
-                Console.WriteLine("{0,27}", "BANK SIMULATOR");
+                Console.WriteLine("{0,27}", "BANK SIMULATOR TEST");
                 bankaccountmanagement.Line();
                 Console.WriteLine();
 

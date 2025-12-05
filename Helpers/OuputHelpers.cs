@@ -18,5 +18,6 @@ namespace Bank_Simulator.Output
             Console.Write("Error: ");
             Console.ResetColor();
         }
+        
     }
 }

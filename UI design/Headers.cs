@@ -35,8 +35,11 @@ namespace Bank_Simulator.UI_design
         }
         public static void lineUI()
         {
-            Console.WriteLine("=========================================");
+            Console.WriteLine("=========================================\n");
         }
-
+        public static void line2()
+        {
+            Console.WriteLine("-------------------------------------------\n");
+        }
     }
 }

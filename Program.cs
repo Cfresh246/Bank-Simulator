@@ -337,7 +337,7 @@ namespace Bank_Simulator
 
         public void ShowAccountDetails(BankAccount bankAccount)
         {
-
+           
         }
     }
 }

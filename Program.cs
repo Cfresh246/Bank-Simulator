@@ -331,13 +331,26 @@ namespace Bank_Simulator
         {
             Headers.HistoryUI();
             Console.WriteLine(string.Join("\n",bankAccount.TransactionHistory));
-            Headers.line2();
+            Headers.lineUI();
             OutputHelpers.KeyContinue();
         }
-
+        // Account description shown
+        /*
+         * ========== ACCOUNT DETAILS ==========
+         * Account Holder: 
+         * Username: 
+         * Account Number: 
+         * Account Type: 
+         * Balance: 
+         * Date Created: 
+         * =====================================
+         */
         public void ShowAccountDetails(BankAccount bankAccount)
         {
-
+            Headers.DetailsUI();
+            Console.WriteLine(bankAccount.Description);
+            Headers.lineUI();
+            OutputHelpers.KeyContinue();
         }
     }
 }

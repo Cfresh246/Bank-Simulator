@@ -8,25 +8,13 @@ namespace Bank_Simulator.Output
 {
     public static class OutputHelpers
     {
-<<<<<<< HEAD
-=======
-
->>>>>>> b65d811d4d39708bf5a2c87a0f6170d4186a3535
         public static void KeyContinue()
         {
             Console.Write("Press any key to continue..."); Console.ReadKey();
         }
-<<<<<<< HEAD
         public static void KeyContinue(string message = "Press any key to continue...")
         {
             Console.Write(message); Console.ReadKey();
-=======
-
-        public static void KeyContinue(string message = "Press any key to continue...")
-        {
-            Console.Write(message); Console.ReadKey();
-
->>>>>>> b65d811d4d39708bf5a2c87a0f6170d4186a3535
         }
         public static void ColorError()
         {
@@ -34,10 +22,6 @@ namespace Bank_Simulator.Output
             Console.Write("Error: ");
             Console.ResetColor();
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> b65d811d4d39708bf5a2c87a0f6170d4186a3535
         public static void ColorNew()
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;

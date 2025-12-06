@@ -59,35 +59,75 @@ namespace Bank_Simulator
             $"Balance: ${Balance}\n" +
             $"Date Created: {TimeCreated}";
 
+        // Deposit to the user bank account itself
         public void Deposit(decimal amount)
         {
+            if (amount <= 0)  // Handling of non positive number and 0.
+            {
+                OutputHelpers.ColorError();
+                Console.WriteLine("Please enter a positive number.");
+                return;
+            }
+
             Balance += amount;
             LastUpdated = DateOnly.FromDateTime(DateTime.UtcNow);
             TransactionHistory.Add($"[{LastUpdated}] +${amount:F2} Deposit ");
+
+            Console.WriteLine("\nDeposit succesful!");
+            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${Balance}\n");
         }
+        // user's withdrawal.
         public void Withdraw(decimal amount)
         {
-            if (Balance < amount)
+            if (Balance < amount) // Insufficient funds handling.
             {
+                OutputHelpers.ColorError();
+                Console.WriteLine("Insufficient funds.");
                 return;
             }
+
+            if (amount <= 0)
+            {
+                OutputHelpers.ColorError();
+                Console.WriteLine("Please enter a positive number.");
+                return;
+            }
+
             Balance -= amount;
             LastUpdated = DateOnly.FromDateTime(DateTime.UtcNow);
             TransactionHistory.Add($"[{LastUpdated}] -${amount:F2} Withdrawal ");
+
+            Console.WriteLine("\nWithdrawal succesful!");
+            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${Balance}\n");
         }
-        public bool TransferTo(BankAccount other, decimal amount)
+        public void TransferTo(BankAccount other, decimal amount)
         {
             if (Balance < amount)
             {
-                return false;
+                OutputHelpers.ColorError();
+                Console.WriteLine("Insufficient funds.");
+                return;
+            }
+
+            if (amount <= 0)
+            {
+                OutputHelpers.ColorError();
+                Console.WriteLine("Please enter a valid amount");
+                return;
             }
             // How we handle the transfer between 2 accounts
             Balance -= amount;
             other.Balance += amount;
-            LastUpdated = DateOnly.FromDateTime(DateTime.UtcNow);
+
+            LastUpdated = DateOnly.FromDateTime(DateTime.UtcNow); // Time it was made
+            // transaction history for both account.
             TransactionHistory.Add($"[{LastUpdated}] -${amount:F2} Transfer to {other.AccountNumber} ");
             other.TransactionHistory.Add($"[{other.LastUpdated}] +${amount:F2} Transfer from {AccountNumber} ");
-            return true;
+
+            Console.WriteLine("\nTransfer succesful!");
+            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${Balance}\n");
+
+
         }
 
         public BankAccount(string _name, string _username, string _pin, string _accountNumber)
@@ -285,9 +325,6 @@ namespace Bank_Simulator
             Headers.DepositUI();
             decimal amount = InputHelper.GetDec("Enter amount to deposit: ");
             bankAccount.Deposit(amount);
-
-            Console.WriteLine("\nDeposit succesful!");
-            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}\n");
             OutputHelpers.KeyContinue();
         }
         public void ToWithdraw(BankAccount bankAccount)
@@ -295,9 +332,6 @@ namespace Bank_Simulator
             Headers.WithdrawUI();
             decimal amount = InputHelper.GetDec("Enter amount to withdraw: ");
             bankAccount.Withdraw(amount);
-
-            Console.WriteLine("\nWithdrawal succesful!");
-            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}\n");
             OutputHelpers.KeyContinue();
         }
 
@@ -312,18 +346,21 @@ namespace Bank_Simulator
             {
                 if (account.Name == otherAccount)
                 {
+                    // if it works
+                    notFound = false;
+
                     BankAccount other = account;
                     account.TransferTo(other, amount);
-                    Console.WriteLine("\nTransfer succesful!");
-                    OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}\n");
+
                     OutputHelpers.KeyContinue();
-                    notFound = false;
+                    break;
                 }
             }
             if (notFound)
             {
                 OutputHelpers.ColorError(); Console.WriteLine("Account number not found.");
                 OutputHelpers.KeyContinue();
+                return;
             }
         }
 

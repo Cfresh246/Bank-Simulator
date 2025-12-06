@@ -1,4 +1,4 @@
-﻿using Bank_Simulator.Input;
+using Bank_Simulator.Input;
 using Bank_Simulator.Validation;
 using Bank_Simulator.Output;
 using Bank_Simulator.UI_design;
@@ -177,7 +177,7 @@ namespace Bank_Simulator
         }
 
         public void Authentication() // Authentication Control system
-                                     // To do:  if there are no account created in the bank flag error.
+                                        // To do:  if there are no account created in the bank flag error.
         {
             if (accounts.Count == 0)
             {

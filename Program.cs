@@ -177,7 +177,7 @@ namespace Bank_Simulator
         }
 
         public void Authentication() // Authentication Control system
-                                        // To do:  if there are no account created in the bank flag error.
+                                     // To do:  if there are no account created in the bank flag error.
         {
             if (accounts.Count == 0)
             {
@@ -287,8 +287,7 @@ namespace Bank_Simulator
             bankAccount.Deposit(amount);
 
             Console.WriteLine("\nDeposit succesful!");
-            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}");
-            Headers.line2();
+            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}\n");
             OutputHelpers.KeyContinue();
         }
         public void ToWithdraw(BankAccount bankAccount)
@@ -298,8 +297,7 @@ namespace Bank_Simulator
             bankAccount.Withdraw(amount);
 
             Console.WriteLine("\nWithdrawal succesful!");
-            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}");
-            Headers.line2();
+            OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}\n");
             OutputHelpers.KeyContinue();
         }
 
@@ -317,8 +315,7 @@ namespace Bank_Simulator
                     BankAccount other = account;
                     account.TransferTo(other, amount);
                     Console.WriteLine("\nTransfer succesful!");
-                    OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}");
-                    Headers.line2();
+                    OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${bankAccount.Balance}\n");
                     OutputHelpers.KeyContinue();
                     notFound = false;
                 }
@@ -334,7 +331,7 @@ namespace Bank_Simulator
         {
             Headers.HistoryUI();
             Console.WriteLine(string.Join("\n",bankAccount.TransactionHistory));
-            Headers.lineUI();
+            Headers.line2();
             OutputHelpers.KeyContinue();
         }
 

@@ -347,14 +347,10 @@ namespace Bank_Simulator
          */
         public void ShowAccountDetails(BankAccount bankAccount)
         {
-<<<<<<< HEAD
-           
-=======
             Headers.DetailsUI();
             Console.WriteLine(bankAccount.Description);
             Headers.lineUI();
             OutputHelpers.KeyContinue();
->>>>>>> account-details
         }
     }
 }

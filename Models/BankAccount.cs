@@ -36,7 +36,7 @@ namespace Bank_Simulator.Models
             if (amount <= 0)  // Handling of non positive number and 0.
             {
                 OutputHelpers.ColorError();
-                Console.WriteLine("Please enter a positive number.");
+                Console.WriteLine("Please enter a valid amount.");
                 return;
             }
 
@@ -60,7 +60,7 @@ namespace Bank_Simulator.Models
             if (amount <= 0)
             {
                 OutputHelpers.ColorError();
-                Console.WriteLine("Please enter a positive number.");
+                Console.WriteLine("Please enter a valid amount");
                 return;
             }
 

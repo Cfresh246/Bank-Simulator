@@ -13,7 +13,7 @@ namespace Bank_Simulator.UI_design
             Console.Clear();
             Console.WriteLine("=========================================");
             Console.WriteLine("             BANK SIMULATOR              ");
-            Console.WriteLine("=========================================\n");
+            Console.WriteLine("=========================================");
             Choice();
         }
         public static void Choice()
@@ -21,6 +21,7 @@ namespace Bank_Simulator.UI_design
             Color(1); Console.WriteLine("Create an account");
             Color(2); Console.WriteLine("Log in");
             Color(3); Console.WriteLine("Exit");
+            Console.WriteLine("=========================================");
         }
         public static void Color(int number)
         {

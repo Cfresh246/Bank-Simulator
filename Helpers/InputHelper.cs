@@ -71,11 +71,11 @@ namespace Bank_Simulator.Input
             string accountNumber = "";
 
             Random generator = new Random();
-            accountNumber += generator.Next(1, 11);
+            accountNumber += generator.Next(1, 10);
 
             for (int i = 0; i < 8;  i++)
             {
-                accountNumber += generator.Next(0, 11);
+                accountNumber += generator.Next(0, 10);
             }
             return accountNumber;
         }

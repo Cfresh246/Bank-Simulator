@@ -212,18 +212,18 @@ namespace Bank_Simulator.Services
         {
             Headers.TransferUI();
             string otherAccount = InputHelper.GetString("Enter recipient account number: ", "Invalid account number:");
-            decimal amount = InputHelper.GetDec("Enter amount to withdraw: ");
 
             bool notFound = true;
             foreach (BankAccount account in accounts)
             {
-                if (account.Name == otherAccount)
+                if (account.AccountNumber == otherAccount)
                 {
                     // if it works
                     notFound = false;
 
                     BankAccount other = account;
-                    account.TransferTo(other, amount);
+                    decimal amount = InputHelper.GetDec($"Enter amount to transfer to {other.Name}: ");
+                    bankAccount.TransferTo(other, amount);  // user bank account transfer to other account.
 
                     OutputHelpers.KeyContinue();
                     break;

@@ -6,15 +6,19 @@ namespace Bank_Simulator
 {
     internal class Program
     {
+       public static string path = "C://Users//Cfresh//OneDrive//Desktop//C#//Bank Simulator//Informations.csv.txt";
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
+            
             MainMenu();
         }
         static void MainMenu()  // Main Menu should work for 100%
         {
             BankAccountServices bankaccountmanagement = new BankAccountServices();  // Creating The Bank Management.
+
+            bankaccountmanagement.LoadAccount(); // To load existing account. 
 
             while (true)
             {

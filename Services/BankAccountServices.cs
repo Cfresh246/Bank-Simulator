@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Bank_Simulator.Services
 {
@@ -82,12 +83,12 @@ namespace Bank_Simulator.Services
                 if (ValidationHelpers.PinValidation(pinInput, confirmPin))
                 {
                     accountNumber = InputHelper.GetAccountNumber();
-                    BankAccount account = new BankAccount(name, username, pinInput, accountNumber);
-                    accounts.Add(account);
-                    DataSaving.SaveData(Program.path, account);
+                    accounts.Add(new BankAccount(name, username, pinInput, accountNumber));
                     break;
                 }
             }
+
+            DataSaving.SaveAllData(Program.path, accounts);
 
             Console.WriteLine("\nAccount created successfully! 🎉");
             Console.WriteLine($"Your account number: {accountNumber}");
@@ -186,6 +187,7 @@ namespace Bank_Simulator.Services
 
                 if (choice == 6)
                 {
+                    DataSaving.SaveAllData(Program.path, accounts);
                     Console.WriteLine("Logging out...");
                     OutputHelpers.KeyContinue("Press any key to return to the main menu.");
                     return;
@@ -273,6 +275,7 @@ namespace Bank_Simulator.Services
     }
     public static class DataSaving
     {
+        /*
         public static void SaveData(string path, BankAccount account) // Save basics data about the user.
         {
 
@@ -289,8 +292,9 @@ namespace Bank_Simulator.Services
             }
 
         }
+        */
 
-        public static void LoadData(string path, List<BankAccount>account)
+        public static void LoadData(string path, List<BankAccount>account)  // Loading data core informations.
         {
             if (!File.Exists(path))
             {
@@ -299,19 +303,63 @@ namespace Bank_Simulator.Services
 
             using (StreamReader sr = new StreamReader(path))
             {
-                if (sr.ReadLine() == "")
-                    return;
+                
+                while (!sr.EndOfStream)
+                {
+                    string? ligne = sr.ReadLine();
+                    
+                    if (ligne != "")
+                    {
+                        string[] items = ligne.Split(",");
+
+                        BankAccount bankaccount = new BankAccount(items[0], items[1], items[3], items[2]);
+                        account.Add(bankaccount);
+                        bankaccount.LoadBalance(decimal.Parse(items[4]));
+                    }
+                    break;
+                }
+            }
+        }
+        /*
+        public static void SaveBalance(string path, BankAccount account, decimal amount)
+        {
+            string[] items;
+            string? ligne;
+
+            using (StreamReader sr = new StreamReader(path))
+            {
 
                 while (!sr.EndOfStream)
                 {
-                    string ligne = sr.ReadLine();
+                    ligne = sr.ReadLine();
 
-                    string[] items = ligne.Split(",");
+                    if (string.IsNullOrWhiteSpace(ligne))
+                    {
+                        return;
+                    }
+                    
+                    if (ligne.StartsWith(account.Name))
+                    {
+                        items = ligne.Split(",");
+                        items[4] = amount.ToString();
+                        break;
+                    }
+                }
+            }
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                sw.Write(account.Name + "," + account.Username + "," + account.AccountNumber + "," + account.Pin + "," + amount + "," + account.TimeCreated + "\n");
+            }
+        }
+        */
 
-                    BankAccount bankaccount = new BankAccount(items[0], items[1], items[3], items[2]);
-                    account.Add(bankaccount);
-                    bankaccount.LoadBalance(decimal.Parse(items[4]));
-
+        public static void SaveAllData(string path, List<BankAccount> bankaccounts)
+        {
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                foreach(BankAccount account in bankaccounts)
+                {
+                    sw.WriteLine(account.Name + "," + account.Username + "," + account.AccountNumber + "," + account.Pin + "," + account.Balance + "," + account.TimeCreated);
                 }
             }
         }

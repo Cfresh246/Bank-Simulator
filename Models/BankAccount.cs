@@ -48,6 +48,7 @@ namespace Bank_Simulator.Models
             Console.WriteLine("\nDeposit succesful!");
             OutputHelpers.ColorNew(); Console.WriteLine($"balance: ${Balance}\n");
         }
+
         // user's withdrawal.
         public void Withdraw(decimal amount)
         {

@@ -1,4 +1,5 @@
 ﻿using Bank_Simulator.Output;
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,6 +101,10 @@ namespace Bank_Simulator.Models
 
 
         }
+        public void LoadBalance(decimal amount)
+        {
+            Balance += amount;
+        }
         public BankAccount(string _name, string _username, string _pin, string _accountNumber)
         {
             Name = _name;
@@ -108,6 +113,7 @@ namespace Bank_Simulator.Models
             AccountNumber = _accountNumber;
             TimeCreated = DateOnly.FromDateTime(DateTime.UtcNow);
         }
+
     }
     
 }

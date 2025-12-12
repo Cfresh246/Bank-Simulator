@@ -18,6 +18,10 @@ namespace Bank_Simulator.Services
 
         // Code to create bank account
         // This part of code works
+        public void LoadAccount()
+        {
+            DataSaving.LoadData(Program.path, accounts);
+        }
         public void CreateAccount()
         {
             CreatingAccountDesign.Header();
@@ -78,7 +82,9 @@ namespace Bank_Simulator.Services
                 if (ValidationHelpers.PinValidation(pinInput, confirmPin))
                 {
                     accountNumber = InputHelper.GetAccountNumber();
-                    accounts.Add(new BankAccount(name, username, pinInput, accountNumber));
+                    BankAccount account = new BankAccount(name, username, pinInput, accountNumber);
+                    accounts.Add(account);
+                    DataSaving.SaveData(Program.path, account);
                     break;
                 }
             }
@@ -87,6 +93,8 @@ namespace Bank_Simulator.Services
             Console.WriteLine($"Your account number: {accountNumber}");
 
             OutputHelpers.KeyContinue("\nPress any key to return to the main menu..");
+
+
         }
 
         public void Authentication() // Authentication Control system
@@ -262,5 +270,51 @@ namespace Bank_Simulator.Services
             Headers.lineUI();
             OutputHelpers.KeyContinue();
         }
-    }   
+    }
+    public static class DataSaving
+    {
+        public static void SaveData(string path, BankAccount account) // Save basics data about the user.
+        {
+
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("File don't exist");
+                return;
+            }
+
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                sw.Write(account.Name +","+ account.Username +","+ account.AccountNumber +","+ account.Pin +","+ account.Balance + "," + account.TimeCreated + "\n");
+                
+            }
+
+        }
+
+        public static void LoadData(string path, List<BankAccount>account)
+        {
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("File don't exist");
+            }
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                if (sr.ReadLine() == "")
+                    return;
+
+                while (!sr.EndOfStream)
+                {
+                    string ligne = sr.ReadLine();
+
+                    string[] items = ligne.Split(",");
+
+                    BankAccount bankaccount = new BankAccount(items[0], items[1], items[3], items[2]);
+                    account.Add(bankaccount);
+                    bankaccount.LoadBalance(decimal.Parse(items[4]));
+
+                }
+            }
+        }
+    }
+    
 }

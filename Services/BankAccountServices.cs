@@ -275,24 +275,6 @@ namespace Bank_Simulator.Services
     }
     public static class DataSaving
     {
-        /*
-        public static void SaveData(string path, BankAccount account) // Save basics data about the user.
-        {
-
-            if (!File.Exists(path))
-            {
-                Console.WriteLine("File don't exist");
-                return;
-            }
-
-            using (StreamWriter sw = new StreamWriter(path, true))
-            {
-                sw.Write(account.Name +","+ account.Username +","+ account.AccountNumber +","+ account.Pin +","+ account.Balance + "," + account.TimeCreated + "\n");
-                
-            }
-
-        }
-        */
 
         public static void LoadData(string path, List<BankAccount>account)  // Loading data core informations.
         {
@@ -320,38 +302,6 @@ namespace Bank_Simulator.Services
                 }
             }
         }
-        /*
-        public static void SaveBalance(string path, BankAccount account, decimal amount)
-        {
-            string[] items;
-            string? ligne;
-
-            using (StreamReader sr = new StreamReader(path))
-            {
-
-                while (!sr.EndOfStream)
-                {
-                    ligne = sr.ReadLine();
-
-                    if (string.IsNullOrWhiteSpace(ligne))
-                    {
-                        return;
-                    }
-                    
-                    if (ligne.StartsWith(account.Name))
-                    {
-                        items = ligne.Split(",");
-                        items[4] = amount.ToString();
-                        break;
-                    }
-                }
-            }
-            using (StreamWriter sw = new StreamWriter(path, true))
-            {
-                sw.Write(account.Name + "," + account.Username + "," + account.AccountNumber + "," + account.Pin + "," + amount + "," + account.TimeCreated + "\n");
-            }
-        }
-        */
 
         public static void SaveAllData(string path, List<BankAccount> bankaccounts)
         {

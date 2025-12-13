@@ -106,13 +106,21 @@ namespace Bank_Simulator.Models
         {
             Balance += amount;
         }
-        public BankAccount(string _name, string _username, string _pin, string _accountNumber)
+        public BankAccount(string _name, string _username, string _pin, string _accountNumber, DateOnly _timeCreated = default)
         {
             Name = _name;
             Username = _username;
             Pin = _pin;
             AccountNumber = _accountNumber;
-            TimeCreated = DateOnly.FromDateTime(DateTime.UtcNow);
+
+            if (_timeCreated == default)
+            {
+                TimeCreated = DateOnly.FromDateTime(DateTime.UtcNow);
+            }
+            else
+            {
+                TimeCreated = _timeCreated;
+            }
         }
 
     }

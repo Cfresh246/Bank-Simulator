@@ -294,7 +294,7 @@ namespace Bank_Simulator.Services
                     {
                         string[] items = ligne.Split(",");
 
-                        BankAccount bankaccount = new BankAccount(items[0], items[1], items[3], items[2]);
+                        BankAccount bankaccount = new BankAccount(items[0], items[1], items[3], items[2], DateOnly.Parse(items[5]));
                         account.Add(bankaccount);
                         bankaccount.LoadBalance(decimal.Parse(items[4]));
                     }

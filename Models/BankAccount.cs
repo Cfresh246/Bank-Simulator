@@ -14,12 +14,12 @@ namespace Bank_Simulator.Models
         // Every personal bank account parameters
         public string Name { get; }
         public string Username { get; }
-        public string Pin { get; private set; }
+        public string Pin { get; }
         public string AccountNumber { get; }
 
         public DateOnly TimeCreated { get; }
 
-        public DateOnly LastUpdated { get; set; }
+        public DateOnly LastUpdated { get; private set; }
         public decimal Balance { get; private set; }
 
         public List<string> TransactionHistory { get; } = new List<string>();  // list of transaction

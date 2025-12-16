@@ -19,7 +19,7 @@ namespace Bank_Simulator.Models
 
         public DateOnly TimeCreated { get; }
 
-        public DateOnly LastUpdated { get; private set; }
+        public DateTime LastUpdated { get; private set; }
         public decimal Balance { get; private set; }
 
         public List<string> TransactionHistory { get; } = new List<string>();  // list of transaction
@@ -42,7 +42,7 @@ namespace Bank_Simulator.Models
             }
 
             Balance += amount;
-            LastUpdated = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdated = DateTime.UtcNow;
             TransactionHistory.Add($"[{LastUpdated}] +${amount:F2} Deposit ");
 
             Console.WriteLine("\nDeposit succesful!");
@@ -67,7 +67,7 @@ namespace Bank_Simulator.Models
             }
 
             Balance -= amount;
-            LastUpdated = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdated = DateTime.UtcNow;
             TransactionHistory.Add($"[{LastUpdated}] -${amount:F2} Withdrawal ");
 
             Console.WriteLine("\nWithdrawal succesful!");
@@ -92,7 +92,7 @@ namespace Bank_Simulator.Models
             Balance -= amount;
             other.Balance += amount;
 
-            LastUpdated = DateOnly.FromDateTime(DateTime.UtcNow); // Time it was made
+            LastUpdated = DateTime.UtcNow; // Time it was made
                                                                     // transaction history for both account.
             TransactionHistory.Add($"[{LastUpdated}] -${amount:F2} Transfer to {other.AccountNumber} ");
             other.TransactionHistory.Add($"[{other.LastUpdated}] +${amount:F2} Transfer from {AccountNumber} ");

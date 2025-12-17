@@ -42,7 +42,7 @@ namespace Bank_Simulator.Models
             }
 
             Balance += amount;
-            LastUpdated = DateTime.UtcNow;
+            LastUpdated = DateTime.Now;
             TransactionHistory.Add($"[{LastUpdated}] +${amount:F2} Deposit ");
 
             Console.WriteLine("\nDeposit succesful!");
@@ -92,7 +92,7 @@ namespace Bank_Simulator.Models
             Balance -= amount;
             other.Balance += amount;
 
-            LastUpdated = DateTime.UtcNow; // Time it was made
+            LastUpdated = DateTime.Now; // Time it was made
                                                                     // transaction history for both account.
             TransactionHistory.Add($"[{LastUpdated}] -${amount:F2} Transfer to {other.AccountNumber} ");
             other.TransactionHistory.Add($"[{other.LastUpdated}] +${amount:F2} Transfer from {AccountNumber} ");

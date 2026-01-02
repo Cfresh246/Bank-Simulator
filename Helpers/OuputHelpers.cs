@@ -8,10 +8,7 @@ namespace Bank_Simulator.Output
 {
     public static class OutputHelpers
     {
-        public static void KeyContinue()
-        {
-            Console.Write("Press any key to continue..."); Console.ReadKey();
-        }
+        
         public static void KeyContinue(string message = "Press any key to continue...")
         {
             Console.Write(message); Console.ReadKey();

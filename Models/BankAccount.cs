@@ -67,7 +67,7 @@ namespace Bank_Simulator.Models
             }
 
             Balance -= amount;
-            LastUpdated = DateTime.UtcNow;
+            LastUpdated = DateTime.Now;
             TransactionHistory.Add($"[{LastUpdated}] -${amount:F2} Withdrawal ");
 
             Console.WriteLine("\nWithdrawal succesful!");

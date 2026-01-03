@@ -120,23 +120,32 @@ namespace Bank_Simulator.Services
                 username = InputHelper.GetString("Enter username: ", "Please enter a valid username");
 
                 bool notFound = true;
-                foreach (BankAccount account in accounts)
+                foreach (BankAccount account in accounts)   // See if username exists
                 {
                     if (username == account.Username)
                     {
-                        currentAccount = account;
+                        currentAccount = account;  // positive if it exists
                         notFound = false;
                         break;
                     }
                 }
 
-                if (notFound)
+                if (notFound)  // Not found output
                 {
                     OutputHelpers.ColorError();
                     Console.WriteLine("Username not found.");
                     OutputHelpers.KeyContinue();
                     continue;
                 }
+
+                if (currentAccount.IsLocked)
+                {
+                    OutputHelpers.ColorError();
+                    Console.WriteLine("Your account has been locked for security purposes");
+                    OutputHelpers.KeyContinue();
+                    return;
+                }
+
                 break;
             }
 
@@ -155,19 +164,22 @@ namespace Bank_Simulator.Services
                     {
                         Console.Write("Account locked due to too many failed attempts.\n" +
                         "Contact support or try again later.\n");
+                        currentAccount?.LockState(); // Locking the account
+                        DataSaving.SaveAllData(Program.path, accounts);
                         OutputHelpers.KeyContinue("\nPress any key to return to the main menu..");
+                        return;
 
                     }
                     Console.WriteLine("Incorrect PIN.\n" +
                     $"Attempts remaining: {tries}");
                     OutputHelpers.KeyContinue();
-                    continue;
+                    continue; 
                 }
                 break;
 
             }
 
-            Console.WriteLine($"Login succesful! Welcome back, {currentAccount.Name}.\n");
+            Console.WriteLine($"Login succesful! Welcome back, {currentAccount?.Name}.\n");
             OutputHelpers.KeyContinue();
             DashBoard(currentAccount);
             return;
@@ -294,11 +306,10 @@ namespace Bank_Simulator.Services
                     {
                         string[] items = ligne.Split(",");
 
-                        BankAccount bankaccount = new BankAccount(items[0], items[1], items[3], items[2], DateOnly.Parse(items[5]));
+                        BankAccount bankaccount = new BankAccount(items[0], items[1], items[3], items[2], DateOnly.Parse(items[5]), bool.Parse(items[6]));
                         account.Add(bankaccount);
                         bankaccount.LoadBalance(decimal.Parse(items[4]));
                     }
-                    break;
                 }
             }
         }
@@ -309,7 +320,7 @@ namespace Bank_Simulator.Services
             {
                 foreach(BankAccount account in bankaccounts)
                 {
-                    sw.WriteLine(account.Name + "," + account.Username + "," + account.AccountNumber + "," + account.Pin + "," + account.Balance + "," + account.TimeCreated);
+                    sw.WriteLine(account.Name + "," + account.Username + "," + account.AccountNumber + "," + account.Pin + "," + account.Balance + "," + account.TimeCreated + "," + account.IsLocked);
                 }
             }
         }

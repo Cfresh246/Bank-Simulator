@@ -22,6 +22,8 @@ namespace Bank_Simulator.Models
         public DateTime LastUpdated { get; private set; }
         public decimal Balance { get; private set; }
 
+        public bool IsLocked { get; private set; }
+
         public List<string> TransactionHistory { get; } = new List<string>();  // list of transaction
 
         public string Description => $"Account Holder: {Name}\n" +
@@ -106,12 +108,14 @@ namespace Bank_Simulator.Models
         {
             Balance += amount;
         }
-        public BankAccount(string _name, string _username, string _pin, string _accountNumber, DateOnly _timeCreated = default)
+        public void LockState() => IsLocked = true;
+        public BankAccount(string _name, string _username, string _pin, string _accountNumber, DateOnly _timeCreated = default, bool lockState = false)
         {
             Name = _name;
             Username = _username;
             Pin = _pin;
             AccountNumber = _accountNumber;
+            IsLocked = lockState;  // lock state is false
 
             if (_timeCreated == default)
             {

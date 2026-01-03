@@ -298,7 +298,6 @@ namespace Bank_Simulator.Services
                         account.Add(bankaccount);
                         bankaccount.LoadBalance(decimal.Parse(items[4]));
                     }
-                    break;
                 }
             }
         }
